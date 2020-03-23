@@ -12,6 +12,9 @@ before_script:
     - mkdir build && cd build
     - $TRAVIS_BUILD_DIR/.travis/before-script-$TRAVIS_OS_NAME.sh
 
+script:
+    - $TRAVIS_BUILD_DIR/.travis/script-$TRAVIS_OS_NAME.sh
+
 before_deploy:
     - mkdir -p $HOME/artifacts/ffmpeg-ext
     - tar czf $TRAVIS_BUILD_DIR/build/install-ext/* $HOME/artifacts/ffmpeg-ext/ffmpeg-ext-$TRAVIS_OS_NAME-$TRAVIS_COMMIT.tgz
