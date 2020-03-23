@@ -1,0 +1,33 @@
+language: cpp
+
+matrix:
+    include:
+        - os: osx
+          osx_image: xcode10
+
+before_install:
+    - $TRAVIS_BUILD_DIR/.travis/before-install-$TRAVIS_OS_NAME.sh
+
+before_script:
+    - mkdir build && cd build
+    - $TRAVIS_BUILD_DIR/.travis/before-script-$TRAVIS_OS_NAME.sh
+
+before_deploy:
+    - mkdir -p $HOME/artifacts/ffmpeg-ext
+    - tar czf $TRAVIS_BUILD_DIR/build/install-ext/* $HOME/artifacts/ffmpeg-ext/ffmpeg-ext-$TRAVIS_OS_NAME-$TRAVIS_COMMIT.tgz
+    - export S3_URL=https://scintillator-synth-binaries/ffmpeg-ext/ffmpeg-ext-$TRAVIS_OS_NAME-$TRAVIS_COMMIT.tgz
+    - echo '<html><head><meta http-equiv="refresh" content="0; url="$S3_URL" /></head></html>' > $HOME/artifacts/ffmpeg-ext-latest-$TRAVIS_OS_NAME.html
+
+deploy:
+    - provider: s3
+      access_key_id: $AWS_KEY
+      secret_access_key: $AWS_SECRET
+      bucket: scintillator-synth-binaries
+      local-dir: $HOME/artifacts
+      upload-dir: .
+      verbose: true
+      edge: true
+      cleanup: false
+      acl: public_read
+      on:
+        branch: master
