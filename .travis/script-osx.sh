@@ -1,5 +1,5 @@
 #!/bin/sh
 
-cmake --build .
-cmake --install .
+cmake --build . --config Release
+cmake --install . --config Release
 
