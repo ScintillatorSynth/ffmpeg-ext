@@ -18,8 +18,8 @@ script:
 before_deploy:
     - mkdir -p $HOME/binaries/ffmpeg-ext
     - tar czf $HOME/binaries/ffmpeg-ext/ffmpeg-ext-$TRAVIS_OS_NAME-$TRAVIS_COMMIT.tgz $TRAVIS_BUILD_DIR/build/install-ext/*
-    - export S3_URL=http://scintillator-synth-coverage.s3-website-us-west-1.amazonaws.com/binaries/ffmpeg-ext/ffmpeg-ext-$TRAVIS_OS_NAME-$TRAVIS_COMMIT.tgz
-    - echo '<html><head><meta http-equiv="refresh" content="0; url="$S3_URL" /></head></html>' > $HOME/binaries/ffmpeg-ext-latest-$TRAVIS_OS_NAME.html
+    - export S3_URL='http://scintillator-synth-coverage.s3-website-us-west-1.amazonaws.com/binaries/ffmpeg-ext/ffmpeg-ext-$TRAVIS_OS_NAME-$TRAVIS_COMMIT.tgz'
+    - echo '<html><head><meta http-equiv="refresh" content="0; url="$S3_URL" /></head></html>' > $HOME/binaries/ffmpeg-ext/ffmpeg-ext-latest-$TRAVIS_OS_NAME.html
 
 deploy:
     - provider: s3
@@ -27,7 +27,7 @@ deploy:
       secret_access_key: $AWS_SECRET
       bucket: scintillator-synth-coverage
       local-dir: $HOME/binaries
-      upload-dir: .
+      upload-dir: binaries
       verbose: true
       edge: true
       cleanup: false
