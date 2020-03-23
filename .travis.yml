@@ -13,12 +13,12 @@ before_script:
     - $TRAVIS_BUILD_DIR/.travis/before-script-$TRAVIS_OS_NAME.sh
 
 script:
-    - $TRAVIS_BUILD_DIR/.travis/script-$TRAVIS_OS_NAME.sh
+    - travis_wait 60 $TRAVIS_BUILD_DIR/.travis/script-$TRAVIS_OS_NAME.sh
 
 before_deploy:
     - mkdir -p $HOME/artifacts/ffmpeg-ext
     - tar czf $HOME/artifacts/ffmpeg-ext/ffmpeg-ext-$TRAVIS_OS_NAME-$TRAVIS_COMMIT.tgz $TRAVIS_BUILD_DIR/build/install-ext/*
-    - export S3_URL=https://scintillator-synth-binaries/ffmpeg-ext/ffmpeg-ext-$TRAVIS_OS_NAME-$TRAVIS_COMMIT.tgz
+    - export S3_URL=http://scintillator-synth-binaries.s3-website-us-west-1.amazonaws.com/ffmpeg-ext/ffmpeg-ext-$TRAVIS_OS_NAME-$TRAVIS_COMMIT.tgz
     - echo '<html><head><meta http-equiv="refresh" content="0; url="$S3_URL" /></head></html>' > $HOME/artifacts/ffmpeg-ext-latest-$TRAVIS_OS_NAME.html
 
 deploy:
