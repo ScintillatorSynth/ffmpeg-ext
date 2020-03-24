@@ -19,7 +19,7 @@ before_deploy:
     - mkdir -p $HOME/binaries/ffmpeg-ext
     - tar czf $HOME/binaries/ffmpeg-ext/ffmpeg-ext-$TRAVIS_OS_NAME-$TRAVIS_COMMIT.tgz $TRAVIS_BUILD_DIR/build/install-ext/*
     - shasum -a 256 -b $HOME/binaries/ffmpeg-ext/ffmpeg-ext-$TRAVIS_OS_NAME-$TRAVIS_COMMIT.tgz > $HOME/binaries/ffmpeg-ext/ffmpeg-ext-$TRAVIS_OS_NAME-$TRAVIS_COMMIT.sha256
-    - export S3_URL='http://scintillator-synth-coverage.s3-website-us-west-1.amazonaws.com/binaries/ffmpeg-ext/ffmpeg-ext-$TRAVIS_OS_NAME-$TRAVIS_COMMIT.tgz'
+    - export S3_URL='http://scintillator-synth-coverage.s3-website-us-west-1.amazonaws.com/binaries/ffmpeg-ext/ffmpeg-ext-'$TRAVIS_OS_NAME'-'$TRAVIS_COMMIT'.tgz'
     - export FWD_HTML='<html><head><meta http-equiv="refresh" content="0; url="'$S3_URL'" /></head></html>'
     - echo $FWD_HTML > $HOME/binaries/ffmpeg-ext/ffmpeg-ext-$TRAVIS_OS_NAME-latest.html
 
