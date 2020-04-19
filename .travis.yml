@@ -2,6 +2,8 @@ language: cpp
 
 matrix:
     include:
+        - os: linux
+          dist: bionic
         - os: osx
           osx_image: xcode10
 
