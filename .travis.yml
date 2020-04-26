@@ -4,6 +4,12 @@ matrix:
     include:
         - os: linux
           dist: bionic
+          env:
+              - CROSS_WINDOWS=false
+        - os: linux
+          dist: bionic
+          env:
+              - CROSS_WINDOWS=true
         - os: osx
           osx_image: xcode10
 
@@ -18,12 +24,13 @@ script:
     - $TRAVIS_BUILD_DIR/.travis/script-$TRAVIS_OS_NAME.sh
 
 before_deploy:
+    - if [ $CROSS_WINDOWS = true ]; then export OS_NAME="win64"; else export OS_NAME=$TRAVIS_OS_NAME; fi
     - mkdir -p $HOME/binaries/ffmpeg-ext
-    - cd $TRAVIS_BUILD_DIR/build/install-ext && tar czf $HOME/binaries/ffmpeg-ext/ffmpeg-ext-$TRAVIS_OS_NAME-$TRAVIS_COMMIT.tgz *
-    - cd $HOME/binaries/ffmpeg-ext && shasum -a 256 -b ffmpeg-ext-$TRAVIS_OS_NAME-$TRAVIS_COMMIT.tgz > $HOME/binaries/ffmpeg-ext/ffmpeg-ext-$TRAVIS_OS_NAME-$TRAVIS_COMMIT.sha256
-    - export S3_URL='http://scintillator-synth-coverage.s3-website-us-west-1.amazonaws.com/binaries/ffmpeg-ext/ffmpeg-ext-'$TRAVIS_OS_NAME'-'$TRAVIS_COMMIT'.tgz'
+    - cd $TRAVIS_BUILD_DIR/build/install-ext && tar czf $HOME/binaries/ffmpeg-ext/ffmpeg-ext-$OS_NAME-$TRAVIS_COMMIT.tgz *
+    - cd $HOME/binaries/ffmpeg-ext && shasum -a 256 -b ffmpeg-ext-$OS_NAME-$TRAVIS_COMMIT.tgz > $HOME/binaries/ffmpeg-ext/ffmpeg-ext-$OS_NAME-$TRAVIS_COMMIT.sha256
+    - export S3_URL='http://scintillator-synth-coverage.s3-website-us-west-1.amazonaws.com/binaries/ffmpeg-ext/ffmpeg-ext-'$OS_NAME'-'$TRAVIS_COMMIT'.tgz'
     - export FWD_HTML='<html><head><meta http-equiv="refresh" content="0; url='$S3_URL'" /></head></html>'
-    - echo $FWD_HTML > $HOME/binaries/ffmpeg-ext/ffmpeg-ext-$TRAVIS_OS_NAME-latest.html
+    - echo $FWD_HTML > $HOME/binaries/ffmpeg-ext/ffmpeg-ext-$OS_NAME-latest.html
 
 deploy:
     - provider: s3
