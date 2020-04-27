@@ -7,6 +7,8 @@ project(ffmpeg-dev VERSION 0.0.1)
 
 set(INSTALL_EXT_DIR "${PROJECT_BINARY_DIR}/install-ext" CACHE PATH "")
 file(MAKE_DIRECTORY "${INSTALL_EXT_DIR}")
+set(SCIN_FFMPEG_GIT_TAG release/4.2)
+set(SCIN_FFMPEG_GIT_REPO https://git.ffmpeg.org/ffmpeg.git)
 
 if(SCIN_CROSS_WINDOWS)
     # We cross-compile for windows on Linux using the script provided by Roger Pack.
@@ -19,7 +21,7 @@ if(SCIN_CROSS_WINDOWS)
         UPDATE_COMMAND ""
         BUILD_IN_SOURCE ON
         CONFIGURE_COMMAND ""
-        BUILD_COMMAND ./cross_compile_ffmpeg.sh --build-ffmpeg-shared=y --compiler-flavors=win64 --enable-gpl=y --sandbox-ok=y
+        BUILD_COMMAND ./cross_compile_ffmpeg.sh --build-ffmpeg-shared=y --compiler-flavors=win64 --enable-gpl=y --sandbox-ok=y --ffmpeg-git-checkout-version=${SCIN_FFMPEG_GIT_TAG} --ffmpeg-git-checkout=${SCIN_FFMPEG_GIT_REPO}
         INSTALL_COMMAND 7z e sandbox/redist/ffmpeg-*-win64-shared.7z -o${INSTALL_EXT_DIR}
     )
 else()
@@ -35,8 +37,8 @@ else()
     ExternalProject_Add(ffmpeg
         PREFIX ext
         STEP_TARGETS install
-        GIT_REPOSITORY https://git.ffmpeg.org/ffmpeg.git
-        GIT_TAG release/4.2
+        GIT_REPOSITORY ${SCIN_FFMPEG_GIT_REPO}
+        GIT_TAG ${SCIN_FFMPEG_GIT_TAG}
         GIT_PROGRESS ON
         UPDATE_COMMAND ""
         BUILD_IN_SOURCE ON
