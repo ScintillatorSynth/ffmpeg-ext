@@ -21,7 +21,7 @@ if(SCIN_CROSS_WINDOWS)
         UPDATE_COMMAND ""
         BUILD_IN_SOURCE ON
         CONFIGURE_COMMAND ""
-        BUILD_COMMAND ./cross_compile_ffmpeg.sh --build-ffmpeg-shared=y --compiler-flavors=win64 --enable-gpl=y --sandbox-ok=y --ffmpeg-git-checkout-version=${SCIN_FFMPEG_GIT_TAG} --ffmpeg-git-checkout=${SCIN_FFMPEG_GIT_REPO}
+        BUILD_COMMAND ./cross_compile_ffmpeg.sh --build-ffmpeg-shared=y --compiler-flavors=win64 --enable-gpl=y --sandbox-ok=y --ffmpeg-git-checkout-version=${SCIN_FFMPEG_GIT_TAG} --ffmpeg-git-checkout=${SCIN_FFMPEG_GIT_REPO} --gcc-cpu-count=2
         INSTALL_COMMAND 7z e sandbox/redist/ffmpeg-*-win64-shared.7z -o${INSTALL_EXT_DIR}
     )
 else()
