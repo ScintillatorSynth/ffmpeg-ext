@@ -1,4 +1,4 @@
 #!/bin/sh
 
-cmake -G Xcode ..
+cmake -G Xcode -DSCIN_FFMPEG_GIT_REPO=$FFMPEG_GIT_REPO -DSCIN_FFMPEG_GET_TAG=$FFMPEG_GIT_TAG ..
 
