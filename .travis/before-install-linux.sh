@@ -8,6 +8,6 @@ if [ $CROSS_WINDOWS = true ]; then
 #        cmake git make pkg-config zlib1g-dev mercurial unzip pax gperf autogen bzip2 autoconf-archive p7zip-full clang \
 #        python3-distutils python3-pip python3-setuptools python3-wheel
 #    pip3 install --user meson || exit 2
-    sudo apt-get install --yes i686-w64-mingw32-gcc i686-w64-mingw32-g++ libtool pkg-config autoconf automake yasm
+    sudo apt-get install --yes g++-mingw-w64-x86-64 gcc-mingw-w64-x86-64 libtool pkg-config autoconf automake yasm
 fi
 
