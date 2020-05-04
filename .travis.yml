@@ -31,7 +31,7 @@ script:
     - $TRAVIS_BUILD_DIR/.travis/script-$TRAVIS_OS_NAME.sh
 
 before_deploy:
-    - if [ $CROSS_WINDOWS = true ]; then export OS_NAME="win64"; else export OS_NAME=$TRAVIS_OS_NAME; fi
+    - if [ $CROSS_WINDOWS = true ]; then export OS_NAME="windows"; else export OS_NAME=$TRAVIS_OS_NAME; fi
     - mkdir -p $HOME/binaries/ffmpeg-ext
     - cd $TRAVIS_BUILD_DIR/build/install-ext && tar czf $HOME/binaries/ffmpeg-ext/ffmpeg-ext-$OS_NAME-$TRAVIS_COMMIT.tgz *
     - cd $HOME/binaries/ffmpeg-ext && shasum -a 256 -b ffmpeg-ext-$OS_NAME-$TRAVIS_COMMIT.tgz > $HOME/binaries/ffmpeg-ext/ffmpeg-ext-$OS_NAME-$TRAVIS_COMMIT.sha256
