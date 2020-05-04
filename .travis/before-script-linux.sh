@@ -1,7 +1,6 @@
 #!/bin/sh
 
 if [ $CROSS_WINDOWS = true ]; then
-#    git clone https://github.com/rdp/ffmpeg-windows-build-helpers
     git clone $FFMPEG_GIT_REPO ffmpeg
     cd ffmpeg
     git checkout $FFMPEG_GIT_TAG
