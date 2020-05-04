@@ -20,8 +20,8 @@ endif()
 ExternalProject_Add(ffmpeg
     PREFIX ext
     STEP_TARGETS install
-    GIT_REPOSITORY https://git.ffmpeg.org/ffmpeg.git
-    GIT_TAG release/4.2
+    GIT_REPOSITORY ${SCIN_FFMPEG_GIT_REPO}
+    GIT_TAG ${SCIN_FFMPEG_GIT_TAG}
     GIT_PROGRESS ON
     UPDATE_COMMAND ""
     BUILD_IN_SOURCE ON
@@ -29,4 +29,3 @@ ExternalProject_Add(ffmpeg
     BUILD_COMMAND ${SCIN_FFMPEG_BUILD}
     INSTALL_COMMAND make install
 )
-
