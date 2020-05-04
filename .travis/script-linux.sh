@@ -8,6 +8,7 @@ if [ $CROSS_WINDOWS = true ]; then
 #        --ffmpeg-git-checkout=${FFMPEG_GIT_REPO} --debug || exit 1
 #    tail -n1000 sandbox/cross_compilers/build.log
 #    7z e sandbox/redist/ffmpeg-*-win64-shared.7z -o$TRAVIS_BUILD_DIR/build/install-ext
+    cd $TRAVIS_BUILD_DIR/build/ffmpeg
     make
     make install
 else
