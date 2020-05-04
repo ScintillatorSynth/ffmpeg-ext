@@ -11,6 +11,7 @@ if [ $CROSS_WINDOWS = true ]; then
     cd $TRAVIS_BUILD_DIR/build/ffmpeg
     make
     make install
+    find $TRAVIS_BUILD_DIR/build/install-ext
 else
     make
 fi
