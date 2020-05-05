@@ -2,23 +2,23 @@ language: cpp
 
 matrix:
     include:
-#        - os: linux
-#          dist: bionic
-#          env:
-#              - CROSS_WINDOWS=false
-#              - FFMPEG_GIT_TAG=release/4.2
-#              - FFMPEG_GIT_REPO=https://git.ffmpeg.org/ffmpeg.git
+        - os: linux
+          dist: bionic
+          env:
+              - CROSS_WINDOWS=false
+              - FFMPEG_GIT_TAG=release/4.2
+              - FFMPEG_GIT_REPO=https://git.ffmpeg.org/ffmpeg.git
         - os: linux
           dist: bionic
           env:
               - CROSS_WINDOWS=true
               - FFMPEG_GIT_TAG=release/4.2
               - FFMPEG_GIT_REPO=https://git.ffmpeg.org/ffmpeg.git
-#        - os: osx
-#          osx_image: xcode10
-#          env:
-#              - FFMPEG_GIT_TAG=release/4.2
-#              - FFMPEG_GIT_REPO=https://git.ffmpeg.org/ffmpeg.git
+        - os: osx
+          osx_image: xcode10
+          env:
+              - FFMPEG_GIT_TAG=release/4.2
+              - FFMPEG_GIT_REPO=https://git.ffmpeg.org/ffmpeg.git
 
 before_install:
     - $TRAVIS_BUILD_DIR/.travis/before-install-$TRAVIS_OS_NAME.sh
