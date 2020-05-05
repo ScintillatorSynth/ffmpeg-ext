@@ -11,7 +11,7 @@ if [ $CROSS_WINDOWS = true ]; then
     # spot of wisdom from https://wiki.openttd.org/Cross-compiling_for_Windows#libpng. The main makefile seems broken
     # for the cross-compilation use case. Modify the win32 makefile to use the mingw setup.
     sed -e s/"PREFIX ="/"PREFIX = x86_64-w64-mingw32-"/ -i win32/Makefile.gcc
-    BINARY_PATH=${TRAVIS_BUILD_DIR}/build/install-ext/bin INCLUDE_PATH=${TRAVIS_BUILD_DIR}/buildinstall-ext/include    \
+    BINARY_PATH=${TRAVIS_BUILD_DIR}/build/install-ext/bin INCLUDE_PATH=${TRAVIS_BUILD_DIR}/build/install-ext/include   \
         LIBRARY_PATH=${TRAVIS_BUILD_DIR}/build/install-ext/lib make -f win32/Makefile.gcc install
 
     # build libpng for png encodes
