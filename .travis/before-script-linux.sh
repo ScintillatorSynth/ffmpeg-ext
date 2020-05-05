@@ -21,7 +21,7 @@ if [ $CROSS_WINDOWS = true ]; then
     git checkout libpng16
     ./configure --prefix=$TRAVIS_BUILD_DIR/build/install-ext --host=x86_64-w64-mingw32 --enable-shared=no              \
         CPPFLAGS="-I${TRAVIS_BUILD_DIR}/build/install-ext/include"                                                     \
-        LDFLAGS="-L${TRAVIS_BUILD_DIR}/build/install-ext/lib -lm"
+        LDFLAGS="-L${TRAVIS_BUILD_DIR}/build/install-ext/lib" LIBS="-lm"
     make
     make install
 
