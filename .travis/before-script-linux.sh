@@ -4,7 +4,7 @@ if [ $CROSS_WINDOWS = true ]; then
     mkdir $TRAVIS_BUILD_DIR/build/install-ext
 
     # build zlib for libpng
-    cd $TRAVIS_BUILD_DIR
+    cd $TRAVIS_BUILD_DIR/build
     git clone https://github.com/madler/zlib zlib
     cd zlib
     git checkout v1.2.11
@@ -15,17 +15,18 @@ if [ $CROSS_WINDOWS = true ]; then
         LIBRARY_PATH=${TRAVIS_BUILD_DIR}/build/install-ext/lib make -f win32/Makefile.gcc install
 
     # build libpng for png encodes
-    cd $TRAVIS_BUILD_DIR
+    cd $TRAVIS_BUILD_DIR/build
     git clone https://github.com/glennrp/libpng libpng
     cd libpng
     git checkout libpng16
     ./configure --prefix=$TRAVIS_BUILD_DIR/build/install-ext --host=x86_64-w64-mingw32 --enable-shared=no              \
-        CPPFLAGS="-I${TRAVIS_BUILD_DIR}/build/install-ext/include" LDFLAGS="-L${TRAVIS_BUILD_DIR}/build/install-ext/lib"
+        CPPFLAGS="-I${TRAVIS_BUILD_DIR}/build/install-ext/include"                                                     \
+        LDFLAGS="-L${TRAVIS_BUILD_DIR}/build/install-ext/lib -lm"
     make
     make install
 
     # configure ffmpeg
-    cd $TRAVIS_BUILD_DIR
+    cd $TRAVIS_BUILD_DIR/build
     git clone $FFMPEG_GIT_REPO ffmpeg
     cd ffmpeg
     git checkout $FFMPEG_GIT_TAG
