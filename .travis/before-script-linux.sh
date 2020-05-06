@@ -23,7 +23,7 @@ if [ $CROSS_WINDOWS = true ]; then
     git clone https://github.com/glennrp/libpng libpng
     cd libpng
     git checkout libpng16
-    ./configure --prefix=$TRAVIS_BUILD_DIR/build/install-ext --host=x86_64-w64-mingw32 --enable-shared=no              \
+    ./configure --prefix=$TRAVIS_BUILD_DIR/pre --host=x86_64-w64-mingw32 --enable-shared=no                            \
         CC=x86_64-w64-mingw32-gcc                                                                                      \
         CPPFLAGS="-I${TRAVIS_BUILD_DIR}/build/pre/include"                                                             \
         LDFLAGS="-L${TRAVIS_BUILD_DIR}/build/pre/lib"
