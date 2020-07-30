@@ -3,7 +3,7 @@ language: cpp
 matrix:
     include:
         - os: linux
-          dist: bionic
+          dist: xenial
           env:
               - CROSS_WINDOWS=false
               - FFMPEG_GIT_TAG=release/4.2
